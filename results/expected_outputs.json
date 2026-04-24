@@ -1,6 +1,6 @@
 {
-  "artifact_scope": "checked-in public result tables",
-  "status": "trend_supported_exact_paper_table_mismatch",
+  "artifact_scope": "checked-in public result tables and run provenance",
+  "status": "trend_supported_with_slurm_provenance_exact_paper_table_mismatch",
   "stage_summary": {
     "post_defoliation": {
       "samples": 265,
@@ -14,6 +14,27 @@
       "mean_white_region_fraction": 0.017528029381434416,
       "mean_exg": 24.04256605505943
     }
+  },
+  "dataset_inventory": {
+    "total_images": 3096,
+    "pre_defoliation_count": 1358,
+    "post_defoliation_count": 1738,
+    "unknown_count": 0,
+    "total_size_gb": 16.518688201904297
+  },
+  "slurm_run_provenance": {
+    "job_id": 3007292,
+    "nodes": 1,
+    "tasks_per_node": 1,
+    "cpus_per_task": 4,
+    "memory": "32G",
+    "partition": "spr",
+    "account": "TG-AGR250027",
+    "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+    "observed_device": "cpu",
+    "rank": 0,
+    "world_size": 1,
+    "status": "Qwen model loaded on CPU; job cancelled at time limit after one post-defoliation sample in slurm_3007292.err"
   },
   "paper_table_ii_reference": {
     "post_defoliation": {
@@ -31,5 +52,5 @@
       "white_fraction": 0.0198
     }
   },
-  "interpretation": "The checked-in result tables support the qualitative stage trend but do not exactly reproduce the draft paper Table II values."
+  "interpretation": "The checked-in result tables support the qualitative stage trend and the newly checked-in files provide SLURM/rank-0 run provenance. They do not exactly reproduce the draft paper Table II values or provide a parsed 4/8/16/32 normalized scaling table."
 }
