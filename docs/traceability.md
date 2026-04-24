@@ -38,6 +38,23 @@ metadata also records a Colab GPU session. These files document the Colab GPU
 execution path, but the audited public Drive folders do not contain a parsed
 4/8/16/32 scaling table that can be compared directly to the paper's Table III.
 
+## SLURM Run Provenance
+
+The checked-in SLURM evidence includes the submitted batch script and logs from
+job `3007292`. The job used one node, one task, four CPUs per task, the `spr`
+partition, and the `TG-AGR250027` allocation. The submitted command ran
+`Qwen/Qwen2.5-VL-3B-Instruct` with `--stage all`, `--batch-size 1`,
+`--num-workers 0`, `--feature-source auto`, `--skip-generation`, and
+`--limit-per-stage 40`.
+
+The logs verify `rank=0`, `world_size=1`, and `local_rank=0`. The April 6
+rank-0 run was marked demonstration mode and wrote
+`results/agrogpt_results_20260406_122646.json`, covering 1,358
+pre-defoliation and 1,738 post-defoliation images. The April 7 SLURM job loaded
+Qwen2.5-VL on CPU and was cancelled at the time limit after processing one
+post-defoliation sample. These files are valid run provenance, but they are not
+a parsed 4/8/16/32 multi-GPU scaling series.
+
 ## Figure and Table Mapping
 
 | Paper item | Claimed result | Matching file | Generation source | Match status | Notes |
