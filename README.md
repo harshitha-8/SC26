@@ -1,5 +1,6 @@
+# Content-Free Computation for Agricultural AI: Distributed Multimodal Representation Learning with Qwen2.5-VL and AgroGPT on Stampede3
 
-# SC26 Artifact: Distributed Multimodal Agricultural AI
+Author: Harshitha Manjnatha
 
 [![Validate artifact tables](https://github.com/harshitha-8/sc26/actions/workflows/validate-artifact.yml/badge.svg)](https://github.com/harshitha-8/sc26/actions/workflows/validate-artifact.yml)
 
