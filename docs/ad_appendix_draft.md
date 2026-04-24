@@ -1,0 +1,89 @@
+# SC26 Artifact Description Draft
+
+This draft is intended as source material for the SC26 AD/AE appendix. It uses
+only the paper, the public notebook, and the checked-in result files.
+
+## Overview of Artifacts
+
+The artifact contains a notebook-derived workflow for UAV cotton orthomosaic
+analysis. It computes deterministic RGB descriptors, estimates a cotton
+visibility proxy using bright-region thresholding and excess-green suppression,
+generates PCA and quantitative figures, and stores checked-in summary tables.
+
+The public files support qualitative reproduction of the paper's stage trend:
+post-defoliation imagery has larger cotton-visibility proxy values and larger
+white-region fraction than pre-defoliation imagery.
+
+## Artifact Availability
+
+The public repository contains:
+
+- figure assets in `figures/`;
+- result CSVs in `results/`;
+- the original Colab notebook in `notebooks/TACC_SC26.ipynb`;
+- standalone reproduction scripts in `scripts/`;
+- traceability and checklist documentation in `docs/`.
+
+The repository does not currently contain the full UAV image dataset, the exact
+80/80 paper split, Stampede3 scaling logs, Figure 5 generation scripts, or a
+public AgroGPT LoRA checkpoint.
+
+## Hardware Requirements
+
+For figure regeneration from already available image folders, a CPU workstation
+is sufficient. Qwen2.5-VL inference cells in the notebook require a GPU for
+practical execution. The paper describes Stampede3 as a SLURM-managed
+distributed GPU environment, but exact hardware specifications are not
+available in this artifact.
+
+## Software Requirements
+
+The standalone figure-generation script requires Python 3 with NumPy, Pandas,
+SciPy, Pillow, Matplotlib, and scikit-learn. Optional notebook cells for
+Qwen2.5-VL require PyTorch, Transformers, Accelerate, and Safetensors.
+
+Exact original package versions are not specified.
+
+## Installation
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
+```
+
+## Experiment Workflow
+
+1. Place UAV image folders under a root directory. Folder names containing
+   `pre` are classified as pre-defoliation; folder names containing `post` are
+   classified as post-defoliation.
+2. Run `scripts/generate_publication_figures.py`.
+3. The script builds `inventory_analysis_table.csv`, aggregates
+   `stage_summary_table.csv`, generates a PCA plot, generates the pre/post
+   grid, and generates the quantitative proxy panel.
+4. Run `scripts/validate_results.py` to compare checked-in summaries to the
+   paper Table II reference values.
+
+## Reproducibility Instructions
+
+```bash
+python3 scripts/generate_publication_figures.py \
+  --root-dir "/path/to/TACC EXPERIMENTS" \
+  --out-dir outputs/publication_figures \
+  --sample-limit 80
+
+python3 scripts/validate_results.py
+```
+
+## Expected Output
+
+The checked-in artifact currently reports:
+
+| Stage | Samples | Mean proxy | Mean white-region fraction |
+|---|---:|---:|---:|
+| post_defoliation | 265 | 9586.962264 | 0.031344693 |
+| pre_defoliation | 160 | 4564.831250 | 0.017528029 |
+
+These values support the qualitative trend but do not exactly reproduce the
+paper Table II values, which report 80 samples per stage. Exact Table II and
+Table III reproduction requires additional split files and Stampede3 logs.
