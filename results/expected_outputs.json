@@ -1,0 +1,35 @@
+{
+  "artifact_scope": "checked-in public result tables",
+  "status": "trend_supported_exact_paper_table_mismatch",
+  "stage_summary": {
+    "post_defoliation": {
+      "samples": 265,
+      "mean_boll_count_proxy": 9586.962264150943,
+      "mean_white_region_fraction": 0.03134469299515945,
+      "mean_exg": 4.6534920669951525
+    },
+    "pre_defoliation": {
+      "samples": 160,
+      "mean_boll_count_proxy": 4564.83125,
+      "mean_white_region_fraction": 0.017528029381434416,
+      "mean_exg": 24.04256605505943
+    }
+  },
+  "paper_table_ii_reference": {
+    "post_defoliation": {
+      "samples": 80,
+      "mean_proxy": 9428,
+      "median": 9311,
+      "std": 1045,
+      "white_fraction": 0.0346
+    },
+    "pre_defoliation": {
+      "samples": 80,
+      "mean_proxy": 4812,
+      "median": 4755,
+      "std": 612,
+      "white_fraction": 0.0198
+    }
+  },
+  "interpretation": "The checked-in result tables support the qualitative stage trend but do not exactly reproduce the draft paper Table II values."
+}
