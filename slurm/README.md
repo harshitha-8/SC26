@@ -1,10 +1,22 @@
-# SLURM Templates
+# SLURM Scripts and Templates
 
-These files are templates for artifact users who want to adapt the workflow to
-a SLURM-managed GPU cluster. They are **not** the original Stampede3 logs or the
-verified 4/8/16/32 GPU scaling scripts used for the paper's Table III.
+This directory contains the submitted SLURM script supplied with the artifact
+and additional templates for adapting the workflow to a SLURM-managed cluster.
 
-For exact Table III reproduction, the artifact still needs:
+Included script:
+
+- `submission.slurm`: submitted single-node, single-task Qwen2.5-VL run using
+  the `spr` partition and `TG-AGR250027` allocation.
+
+Template scripts:
+
+- `run_single_node_qwen_template.slurm`
+- `run_scaling_placeholder.slurm`
+
+Related logs are checked in under `logs/`.
+
+For exact normalized Table III reproduction, the artifact still needs the
+parsed 4/8/16/32 scaling table if those final values are reported:
 
 - original `sbatch` scripts for 4, 8, 16, and 32 GPU configurations;
 - corresponding `.out` and `.err` logs;
