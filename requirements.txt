@@ -1,0 +1,10 @@
+accelerate
+matplotlib
+numpy
+pandas
+pillow
+scikit-learn
+scipy
+safetensors
+torch
+transformers
