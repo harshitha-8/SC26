@@ -63,10 +63,10 @@ a parsed 4/8/16/32 multi-GPU scaling series.
 | Fig. 2 | Pre/post raw image, heatmap/response, and candidate detection panel | `figures/fig_2x3_pre_post_grid.png` | `scripts/generate_publication_figures.py` | Approximate reproduction | Generated from image folders using deterministic thresholding. |
 | Fig. 3 | PCA separation of pre/post image descriptors | `figures/fig_pca_publication.png` | `scripts/generate_publication_figures.py` | Strong visual match | The paper PDF embeds a same-size PCA image, but PDF recompression changes file hash. |
 | Fig. 4 | Visibility density vs proxy count and stage-wise contrast | `figures/fig_quantitative_panel.png`, `results/inventory_analysis_table.csv`, `results/stage_summary_table.csv` | `scripts/generate_publication_figures.py` | Trend supported, exact table mismatch | Current CSV values do not exactly match the draft Table II values. |
-| Fig. 5 | 4/8/16/32 GPU scaling behavior | Notebook Colab GPU/proxy workflow | `notebooks/TACC_SC26.ipynb` / `LLM_colab_paper_fixed.py` cell | Needs parsed scaling output | The notebook documents Colab GPU execution and latency collection. A checked-in 4/8/16/32 scaling table or log is still needed for exact figure verification. |
+| Fig. 5 | 4/8/16/32 GPU scaling behavior | `slurm/submission.slurm`, `logs/slurm_3007292.log`, `logs/slurm_3007292.err`, `logs/inference_rank0.log` | Submitted SLURM command and run logs | Run provenance included; exact curve not reconstructed | The files document SLURM execution and rank-0 processing. They do not contain a parsed 4/8/16/32 scaling series. |
 | Table I | Qwen2.5-VL and AgroGPT inventory recommendations | `results/model_comparison_results.csv` partially | Notebook Qwen comparison cell | Partially supported | The available CSV contains Qwen2.5-VL outputs only. No public AgroGPT LoRA checkpoint is included. |
-| Table II | Stage-wise proxy statistics, reported as 80 pre and 80 post samples | `results/stage_summary_table.csv` | `scripts/generate_publication_figures.py` | Not exact | Current files contain 160 pre-defoliation and 265 post-defoliation rows. |
-| Table III | Normalized scaling summary for 4, 8, 16, and 32 GPUs | Notebook Colab GPU/proxy workflow | `notebooks/TACC_SC26.ipynb` | Needs parsed scaling output | Direct verification requires the exact parsed Colab or Stampede3 scaling output used for the final paper table. |
+| Table II | Stage-wise proxy statistics, reported as 80 pre and 80 post samples | `results/stage_summary_table.csv`, `results/dataset_inventory.json`, `results/agrogpt_results_20260406_122646.json` | Notebook/script outputs and rank-0 inventory pass | Stage evidence included; exact draft table not reproduced | Current files contain 160/265 descriptor rows plus inventory counts of 1,358 pre and 1,738 post images. |
+| Table III | Normalized scaling summary for 4, 8, 16, and 32 GPUs | `slurm/submission.slurm`, `logs/slurm_3007292.log`, `logs/slurm_3007292.err`, `logs/inference_rank0.log` | Submitted SLURM command and run logs | Run provenance included; exact normalized table not reconstructed | Direct verification of 4/8/16/32 normalized values requires the parsed scaling table used for the final paper. |
 
 ## Current Checked-In Stage Summary
 
@@ -84,7 +84,8 @@ not exactly reproduce the paper's draft Table II.
 ## Additional Files Needed for Exact Artifact Evaluation
 
 - Exact 80/80 split file used for Table II.
-- Parsed Colab or Stampede3 scaling logs/scripts for the 4/8/16/32 GPU experiments.
+- Parsed 4/8/16/32 scaling table if exact normalized Table III values are
+  claimed.
 - Public AgroGPT LoRA checkpoint or documented access instructions.
 - Environment lock file or container image for exact reruns.
 - Automated checks for every paper table and figure.
