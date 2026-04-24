@@ -20,13 +20,16 @@ The public repository contains:
 
 - figure assets in `figures/`;
 - result CSVs in `results/`;
+- run-provenance JSON files in `results/`;
+- SLURM and inference logs in `logs/`;
 - the original Colab notebook in `notebooks/TACC_SC26.ipynb`;
 - standalone reproduction scripts in `scripts/`;
 - traceability and checklist documentation in `docs/`.
 
 The repository does not currently contain the full UAV image dataset, the exact
-80/80 paper split, a parsed 4/8/16/32 scaling-output table for exact Table III
-verification, Figure 5 generation scripts, or a public AgroGPT LoRA checkpoint.
+80/80 paper split, a parsed 4/8/16/32 scaling-output table for exact normalized
+Table III verification, Figure 5 generation scripts, or a public AgroGPT LoRA
+checkpoint.
 
 ## Hardware Requirements
 
@@ -36,6 +39,10 @@ practical execution. The paper describes Stampede3 as a SLURM-managed
 distributed GPU environment. The checked-in notebook also documents a Colab GPU
 fallback/proxy workflow used when direct Stampede3 access was unavailable. Exact
 Stampede3 hardware specifications are not available in this artifact.
+
+The checked-in SLURM job provenance used one node, one task, four CPUs per task,
+32 GB memory, and the `spr` partition. The logs report CPU execution for the
+Qwen2.5-VL job.
 
 ## Software Requirements
 
@@ -68,6 +75,11 @@ python3 -m pip install -r requirements.txt
    `LLM_colab_paper_fixed.py`. These cells run Qwen2.5-VL inference, collect
    latency measurements, and write Colab Drive outputs such as
    `paper_results.json` and `paper_results_table.csv`.
+6. For the SLURM provenance path, inspect `slurm/submission.slurm`,
+   `logs/slurm_3007292.log`, `logs/slurm_3007292.err`, and
+   `logs/inference_rank0.log`. These files document submitted commands,
+   environment packages, rank-0 execution, dataset inventory processing, and
+   the time-limit termination of job `3007292`.
 
 ## Reproducibility Instructions
 
@@ -91,5 +103,5 @@ The checked-in artifact currently reports:
 
 These values support the qualitative trend but do not exactly reproduce the
 paper Table II values, which report 80 samples per stage. Exact Table II and
-Table III reproduction requires the exact split files and parsed Colab or
-Stampede3 scaling outputs used for the final paper tables.
+Table III reproduction requires the exact split files and, for normalized
+multi-GPU scaling, the parsed 4/8/16/32 output table used for the final paper.
