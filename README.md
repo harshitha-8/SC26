@@ -1,5 +1,7 @@
 # SC26 Artifact: Distributed Multimodal Agricultural AI
 
+[![Validate artifact tables](https://github.com/harshitha-8/sc26/actions/workflows/validate-artifact.yml/badge.svg)](https://github.com/harshitha-8/sc26/actions/workflows/validate-artifact.yml)
+
 This repository contains the artifact materials for the SC26 submission
 **Content-Free Computation for Agricultural AI: Distributed Multimodal
 Representation Learning with Qwen2.5-VL and AgroGPT on Stampede3**.
@@ -27,7 +29,13 @@ scripts/
 notebooks/
   TACC_SC26.ipynb
 docs/
+  ad_appendix_draft.md
+  artifact_checklist.md
   traceability.md
+slurm/
+  README.md
+  run_single_node_qwen_template.slurm
+  run_scaling_placeholder.slurm
 requirements.txt
 ```
 
@@ -48,6 +56,13 @@ The repository is also explicit about current limitations. The checked-in CSVs
 do **not** exactly reproduce the paper's draft Table II values, and the current
 artifact does not include the original 4/8/16/32 GPU scaling logs for Table III.
 See [docs/traceability.md](docs/traceability.md) for the full mapping.
+
+For AE readiness, see:
+
+- [Traceability matrix](docs/traceability.md)
+- [Artifact evaluation checklist](docs/artifact_checklist.md)
+- [AD appendix draft notes](docs/ad_appendix_draft.md)
+- [SLURM template notes](slurm/README.md)
 
 ## Figure Gallery
 
