@@ -2,7 +2,7 @@
 
 This document maps the checked-in artifact files to the paper figures and
 tables. It is deliberately conservative: unsupported claims are marked as
-missing or not exactly reproduced.
+requiring additional provenance or not exactly reproduced.
 
 ## Verified Files
 
@@ -19,6 +19,19 @@ missing or not exactly reproduced.
 | `scripts/generate_publication_figures.py` | Standalone figure/table generator adapted from the notebook |
 | `scripts/validate_results.py` | Result checker comparing current CSV values to the paper table |
 
+## Colab GPU Provenance
+
+The checked-in notebook contains Colab GPU fallback/proxy workflows used when
+direct Stampede3 access was unavailable. In particular, it writes and runs
+`LLM_colab_paper_fixed.py`, logs a single-rank GPU execution
+(`rank=0`, `world_size=1`, `local_rank=0`), records the selected CUDA device,
+and writes latency-oriented outputs such as `paper_results.json`,
+`paper_results_table.csv`, `fig1_domain_distribution.png`, and
+`fig2_latency_analysis.png` under the Colab Drive output directory. The notebook
+metadata also records a Colab GPU session. These files document the Colab GPU
+execution path, but the audited public Drive folders do not contain a parsed
+4/8/16/32 scaling table that can be compared directly to the paper's Table III.
+
 ## Figure and Table Mapping
 
 | Paper item | Claimed result | Matching file | Generation source | Match status | Notes |
@@ -27,10 +40,10 @@ missing or not exactly reproduced.
 | Fig. 2 | Pre/post raw image, heatmap/response, and candidate detection panel | `figures/fig_2x3_pre_post_grid.png` | `scripts/generate_publication_figures.py` | Approximate reproduction | Generated from image folders using deterministic thresholding. |
 | Fig. 3 | PCA separation of pre/post image descriptors | `figures/fig_pca_publication.png` | `scripts/generate_publication_figures.py` | Strong visual match | The paper PDF embeds a same-size PCA image, but PDF recompression changes file hash. |
 | Fig. 4 | Visibility density vs proxy count and stage-wise contrast | `figures/fig_quantitative_panel.png`, `results/inventory_analysis_table.csv`, `results/stage_summary_table.csv` | `scripts/generate_publication_figures.py` | Trend supported, exact table mismatch | Current CSV values do not exactly match the draft Table II values. |
-| Fig. 5 | 4/8/16/32 GPU scaling behavior | Not available | Not available | Missing | No scaling logs, scaling CSV, or scaling plot script are included. |
+| Fig. 5 | 4/8/16/32 GPU scaling behavior | Notebook Colab GPU/proxy workflow | `notebooks/TACC_SC26.ipynb` / `LLM_colab_paper_fixed.py` cell | Needs parsed scaling output | The notebook documents Colab GPU execution and latency collection. A checked-in 4/8/16/32 scaling table or log is still needed for exact figure verification. |
 | Table I | Qwen2.5-VL and AgroGPT inventory recommendations | `results/model_comparison_results.csv` partially | Notebook Qwen comparison cell | Partially supported | The available CSV contains Qwen2.5-VL outputs only. No public AgroGPT LoRA checkpoint is included. |
 | Table II | Stage-wise proxy statistics, reported as 80 pre and 80 post samples | `results/stage_summary_table.csv` | `scripts/generate_publication_figures.py` | Not exact | Current files contain 160 pre-defoliation and 265 post-defoliation rows. |
-| Table III | Normalized scaling summary for 4, 8, 16, and 32 GPUs | Not available | Not available | Missing | Requires original SLURM logs and scaling scripts. |
+| Table III | Normalized scaling summary for 4, 8, 16, and 32 GPUs | Notebook Colab GPU/proxy workflow | `notebooks/TACC_SC26.ipynb` | Needs parsed scaling output | Direct verification requires the exact parsed Colab or Stampede3 scaling output used for the final paper table. |
 
 ## Current Checked-In Stage Summary
 
@@ -45,10 +58,10 @@ These values support the paper's qualitative claim that post-defoliation imagery
 has higher visible cotton proxy values and larger white-region fraction. They do
 not exactly reproduce the paper's draft Table II.
 
-## Missing for Full Artifact Evaluation
+## Additional Files Needed for Exact Artifact Evaluation
 
 - Exact 80/80 split file used for Table II.
-- Original scaling logs and scripts for the 4/8/16/32 GPU experiments.
+- Parsed Colab or Stampede3 scaling logs/scripts for the 4/8/16/32 GPU experiments.
 - Public AgroGPT LoRA checkpoint or documented access instructions.
 - Environment lock file or container image for exact reruns.
 - Automated checks for every paper table and figure.

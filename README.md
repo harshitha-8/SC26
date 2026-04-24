@@ -52,14 +52,19 @@ The checked-in result files support the following reproducible claims:
 - the notebook workflow can regenerate the public PCA, quantitative, and
   pre/post visual comparison figures from image folders.
 
-The repository is also explicit about current limitations. The checked-in CSVs
-do **not** exactly reproduce the paper's draft Table II values, and the current
-artifact does not include the original 4/8/16/32 GPU scaling logs for Table III.
-See [docs/traceability.md](docs/traceability.md) for the full mapping.
+The repository is also explicit about provenance. The checked-in CSVs correspond
+to the current notebook/Drive output set, while the paper draft reports a
+smaller 80/80 Table II summary. The notebook includes Colab GPU fallback/proxy
+workflows used when direct Stampede3 access was unavailable, including
+Qwen2.5-VL inference, latency measurement, and publication-output generation.
+Exact Table III verification should be tied to the parsed Colab or Stampede3
+scaling output used for the final paper table. See
+[docs/traceability.md](docs/traceability.md) for the full mapping.
 
 For AE readiness, see:
 
 - [Traceability matrix](docs/traceability.md)
+- [Colab GPU provenance notes](docs/colab_gpu_provenance.md)
 - [Artifact evaluation checklist](docs/artifact_checklist.md)
 - [AD appendix draft notes](docs/ad_appendix_draft.md)
 - [SLURM template notes](slurm/README.md)
@@ -101,7 +106,8 @@ The figure-generation workflow uses:
 - scikit-learn
 - PyTorch and Transformers for the optional Qwen2.5-VL notebook cells
 
-Exact package versions from the original Colab environment were not recorded.
+The checked-in notebook metadata records a Colab GPU session. Exact package
+versions from that Colab environment were not recorded.
 
 ## Data
 
@@ -175,22 +181,23 @@ match the draft Table II numbers.
 | Fig. 2 pre/post comparison | `figures/fig_2x3_pre_post_grid.png` | reproducible from script |
 | Fig. 3 PCA descriptors | `figures/fig_pca_publication.png` | reproducible from script |
 | Fig. 4 visibility proxy panel | `figures/fig_quantitative_panel.png` | reproducible from script |
-| Fig. 5 scaling | not included | requires original scaling logs |
+| Fig. 5 scaling | notebook Colab GPU/proxy workflow | parsed scaling table/log needed for exact match |
 | Table I reasoning outputs | `results/model_comparison_results.csv` partially | Qwen2.5-VL only |
 | Table II stage statistics | `results/stage_summary_table.csv` | trend supported; exact draft values differ |
-| Table III scaling summary | not included | requires original SLURM logs |
+| Table III scaling summary | notebook Colab GPU/proxy workflow | exact 4/8/16/32 values need parsed scaling output |
 
 ## Notes for Artifact Evaluation
 
-This artifact should be evaluated as a figure-generation and traceability
-package for the current public outputs. Full reproduction of the paper's final
-numerical tables requires additional files that are not presently included:
+This artifact should be evaluated as a figure-generation, Colab GPU/proxy, and
+traceability package for the current public outputs. Full reproduction of the
+paper's final numerical tables requires the exact provenance files used for the
+submitted numbers:
 
 - the exact 80 pre / 80 post image split used for draft Table II;
-- original scaling logs for the 4, 8, 16, and 32 GPU runs;
-- SLURM scripts for each scaling configuration;
+- parsed Colab or Stampede3 scaling logs for the 4, 8, 16, and 32 GPU runs;
+- SLURM scripts or Colab commands for each scaling configuration;
 - a public AgroGPT LoRA checkpoint or explicit access instructions;
 - an environment lock file or container image.
 
-The repository avoids claiming exact reproducibility where the supporting files
-are not available.
+The repository avoids claiming exact numerical reproducibility where the
+supporting output file is not checked in.

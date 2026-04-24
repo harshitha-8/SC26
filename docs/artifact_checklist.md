@@ -16,6 +16,7 @@ reproducibility.
 - [x] Validation script: `scripts/validate_results.py`.
 - [x] GitHub Actions workflow for table validation.
 - [x] Traceability matrix: `docs/traceability.md`.
+- [x] Colab GPU fallback/proxy workflow in `notebooks/TACC_SC26.ipynb`.
 
 ## Partially Available
 
@@ -25,12 +26,14 @@ reproducibility.
       exact paper 80/80 split is not included.
 - [ ] Figure 1 pipeline: the final figure asset is included, but no editable
       source file or drawing script is included.
+- [ ] Table III scaling: the notebook documents Colab GPU execution and latency
+      collection, but the exact parsed 4/8/16/32 scaling table is not checked in.
 
 ## Missing
 
 - [ ] Exact 80 pre-defoliation / 80 post-defoliation split used in the paper.
-- [ ] Original Stampede3 SLURM logs for 4, 8, 16, and 32 GPU runs.
-- [ ] Scaling CSV or JSON backing Table III.
+- [ ] Parsed Colab or Stampede3 scaling logs for 4, 8, 16, and 32 GPU runs.
+- [ ] Scaling CSV or JSON backing the exact Table III values.
 - [ ] Figure 5 generation script.
 - [ ] Public AgroGPT LoRA adapter or documented access instructions.
 - [ ] Environment lock file from the original Colab/Stampede3 execution.
@@ -42,5 +45,5 @@ reproducibility.
    figures.
 3. Treat the artifact as supporting the public figure-generation workflow and
    qualitative cotton-visibility trend.
-4. Request the missing 80/80 split and scaling logs before accepting exact
-   reproduction of Table II or Table III.
+4. Request the exact 80/80 split and parsed scaling output before accepting
+   exact reproduction of Table II or Table III.

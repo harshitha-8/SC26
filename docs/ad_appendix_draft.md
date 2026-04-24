@@ -25,16 +25,17 @@ The public repository contains:
 - traceability and checklist documentation in `docs/`.
 
 The repository does not currently contain the full UAV image dataset, the exact
-80/80 paper split, Stampede3 scaling logs, Figure 5 generation scripts, or a
-public AgroGPT LoRA checkpoint.
+80/80 paper split, a parsed 4/8/16/32 scaling-output table for exact Table III
+verification, Figure 5 generation scripts, or a public AgroGPT LoRA checkpoint.
 
 ## Hardware Requirements
 
 For figure regeneration from already available image folders, a CPU workstation
 is sufficient. Qwen2.5-VL inference cells in the notebook require a GPU for
 practical execution. The paper describes Stampede3 as a SLURM-managed
-distributed GPU environment, but exact hardware specifications are not
-available in this artifact.
+distributed GPU environment. The checked-in notebook also documents a Colab GPU
+fallback/proxy workflow used when direct Stampede3 access was unavailable. Exact
+Stampede3 hardware specifications are not available in this artifact.
 
 ## Software Requirements
 
@@ -63,6 +64,10 @@ python3 -m pip install -r requirements.txt
    grid, and generates the quantitative proxy panel.
 4. Run `scripts/validate_results.py` to compare checked-in summaries to the
    paper Table II reference values.
+5. For the GPU execution path, use the Colab notebook cells that write and run
+   `LLM_colab_paper_fixed.py`. These cells run Qwen2.5-VL inference, collect
+   latency measurements, and write Colab Drive outputs such as
+   `paper_results.json` and `paper_results_table.csv`.
 
 ## Reproducibility Instructions
 
@@ -86,4 +91,5 @@ The checked-in artifact currently reports:
 
 These values support the qualitative trend but do not exactly reproduce the
 paper Table II values, which report 80 samples per stage. Exact Table II and
-Table III reproduction requires additional split files and Stampede3 logs.
+Table III reproduction requires the exact split files and parsed Colab or
+Stampede3 scaling outputs used for the final paper tables.
