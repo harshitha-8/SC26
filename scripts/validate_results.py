@@ -8,6 +8,7 @@ draft Table II values exactly.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -35,6 +36,9 @@ def main() -> int:
     root = Path(__file__).resolve().parents[1]
     inventory = pd.read_csv(root / "results" / "inventory_analysis_table.csv")
     summary = pd.read_csv(root / "results" / "stage_summary_table.csv")
+    dataset_inventory_path = root / "results" / "dataset_inventory.json"
+    run_results_path = root / "results" / "agrogpt_results_20260406_122646.json"
+    slurm_err_path = root / "logs" / "slurm_3007292.err"
 
     derived = inventory.groupby("stage").agg(
         samples=("path", "count"),
@@ -68,6 +72,35 @@ def main() -> int:
             print(f"- {stage}: exact match")
 
     print("\nStatus:", "exact match" if exact else "trend supported; exact paper values not reproduced")
+    if dataset_inventory_path.exists():
+        dataset_inventory = json.loads(dataset_inventory_path.read_text())
+        stats = dataset_inventory.get("statistics", {})
+        print("\nDataset inventory provenance")
+        print(
+            f"- total_images={stats.get('total_images')} "
+            f"pre={stats.get('pre_defoliation_count')} "
+            f"post={stats.get('post_defoliation_count')}"
+        )
+    if run_results_path.exists():
+        run_results = json.loads(run_results_path.read_text())
+        metadata = run_results.get("metadata", {})
+        stages = run_results.get("stages", {})
+        print("\nRank-0 run provenance")
+        print(
+            f"- model={metadata.get('model')} "
+            f"rank={metadata.get('rank')} "
+            f"world_size={metadata.get('world_size')} "
+            f"demo_mode={metadata.get('demo_mode')}"
+        )
+        print(
+            "- stage_counts="
+            + ", ".join(f"{name}:{stage.get('count')}" for name, stage in stages.items())
+        )
+    if slurm_err_path.exists():
+        slurm_err = slurm_err_path.read_text()
+        if "CANCELLED" in slurm_err and "TIME LIMIT" in slurm_err:
+            print("\nSLURM provenance")
+            print("- job 3007292 log present; terminated by time limit after starting Qwen2.5-VL run")
     return 0
 
 
