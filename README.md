@@ -20,9 +20,15 @@ figures/
   fig_pca_publication.png
   fig_quantitative_panel.png
 results/
+  agrogpt_results_20260406_122646.json
+  dataset_inventory.json
   inventory_analysis_table.csv
   model_comparison_results.csv
   stage_summary_table.csv
+logs/
+  inference_rank0.log
+  slurm_3007292.err
+  slurm_3007292.log
 scripts/
   generate_publication_figures.py
   validate_results.py
@@ -31,9 +37,11 @@ notebooks/
 docs/
   ad_appendix_draft.md
   artifact_checklist.md
+  slurm_run_provenance.md
   traceability.md
 slurm/
   README.md
+  submission.slurm
   run_single_node_qwen_template.slurm
   run_scaling_placeholder.slurm
 requirements.txt
@@ -65,6 +73,7 @@ For AE readiness, see:
 
 - [Traceability matrix](docs/traceability.md)
 - [Colab GPU provenance notes](docs/colab_gpu_provenance.md)
+- [SLURM run provenance notes](docs/slurm_run_provenance.md)
 - [Artifact evaluation checklist](docs/artifact_checklist.md)
 - [AD appendix draft notes](docs/ad_appendix_draft.md)
 - [SLURM template notes](slurm/README.md)
@@ -181,10 +190,10 @@ match the draft Table II numbers.
 | Fig. 2 pre/post comparison | `figures/fig_2x3_pre_post_grid.png` | reproducible from script |
 | Fig. 3 PCA descriptors | `figures/fig_pca_publication.png` | reproducible from script |
 | Fig. 4 visibility proxy panel | `figures/fig_quantitative_panel.png` | reproducible from script |
-| Fig. 5 scaling | notebook Colab GPU/proxy workflow | parsed scaling table/log needed for exact match |
+| Fig. 5 scaling | `slurm/submission.slurm`, `logs/slurm_3007292.*`, `logs/inference_rank0.log` | SLURM run evidence included; exact multi-GPU curve needs parsed scaling table |
 | Table I reasoning outputs | `results/model_comparison_results.csv` partially | Qwen2.5-VL only |
-| Table II stage statistics | `results/stage_summary_table.csv` | trend supported; exact draft values differ |
-| Table III scaling summary | notebook Colab GPU/proxy workflow | exact 4/8/16/32 values need parsed scaling output |
+| Table II stage statistics | `results/stage_summary_table.csv`, `results/dataset_inventory.json`, `results/agrogpt_results_20260406_122646.json` | stage statistics and inventory included; exact draft values differ |
+| Table III scaling summary | `slurm/submission.slurm`, `logs/slurm_3007292.*`, `logs/inference_rank0.log` | SLURM run evidence included; exact 4/8/16/32 summary needs parsed scaling table |
 
 ## Notes for Artifact Evaluation
 
@@ -194,8 +203,10 @@ paper's final numerical tables requires the exact provenance files used for the
 submitted numbers:
 
 - the exact 80 pre / 80 post image split used for draft Table II;
-- parsed Colab or Stampede3 scaling logs for the 4, 8, 16, and 32 GPU runs;
-- SLURM scripts or Colab commands for each scaling configuration;
+- the parsed 4/8/16/32 scaling table if the final Table III uses normalized
+  multi-GPU values beyond the checked-in single-rank SLURM logs;
+- additional SLURM scripts or Colab commands for each scaling configuration,
+  if separate from `slurm/submission.slurm`;
 - a public AgroGPT LoRA checkpoint or explicit access instructions;
 - an environment lock file or container image.
 
