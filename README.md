@@ -1,3 +1,4 @@
+
 # SC26 Artifact: Distributed Multimodal Agricultural AI
 
 [![Validate artifact tables](https://github.com/harshitha-8/sc26/actions/workflows/validate-artifact.yml/badge.svg)](https://github.com/harshitha-8/sc26/actions/workflows/validate-artifact.yml)
