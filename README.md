@@ -1,7 +1,5 @@
 # Content-Free Computation for Agricultural AI: Distributed Multimodal Representation Learning with Qwen2.5-VL and AgroGPT on Stampede3
 
-Author: Harshitha Manjnatha
-
 This repository contains the artifact materials for the SC26 submission
 **Content-Free Computation for Agricultural AI: Distributed Multimodal
 Representation Learning with Qwen2.5-VL and AgroGPT on Stampede3**.
