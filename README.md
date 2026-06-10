@@ -71,6 +71,7 @@ For AE readiness, see:
 
 - [Traceability matrix](docs/traceability.md)
 - [Colab GPU provenance notes](docs/colab_gpu_provenance.md)
+- [Rebuttal evidence notes](docs/rebuttal_evidence.md)
 - [SLURM run provenance notes](docs/slurm_run_provenance.md)
 - [Artifact evaluation checklist](docs/artifact_checklist.md)
 - [AD appendix draft notes](docs/ad_appendix_draft.md)

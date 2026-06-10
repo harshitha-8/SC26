@@ -225,15 +225,38 @@ def make_quantitative_panel(df: pd.DataFrame, out_dir: Path) -> None:
     axes[0].grid(alpha=0.16, linewidth=0.6)
 
     x = np.arange(len(summary))
-    width = 0.36
-    axes[1].bar(x - width / 2, summary["mean_boll_count_proxy"], width=width, label="Mean proxy count")
-    axes[1].bar(x + width / 2, summary["mean_white_region_fraction"] * 100, width=width, label="Mean white fraction (x100)")
-    clean_axes(axes[1])
-    axes[1].set_xticks(x)
-    axes[1].set_xticklabels(summary["stage"].str.replace("_", "-"))
-    axes[1].set_title("Stage-wise contrast in cotton visibility")
-    axes[1].legend(frameon=False)
-    axes[1].grid(axis="y", alpha=0.16, linewidth=0.6)
+    width = 0.34
+    proxy_ax = axes[1]
+    fraction_ax = proxy_ax.twinx()
+
+    proxy_bars = proxy_ax.bar(
+        x - width / 2,
+        summary["mean_boll_count_proxy"],
+        width=width,
+        label="Mean proxy count",
+        color="#4C78A8",
+    )
+    fraction_bars = fraction_ax.bar(
+        x + width / 2,
+        summary["mean_white_region_fraction"],
+        width=width,
+        label="Mean white-region fraction",
+        color="#F58518",
+    )
+    clean_axes(proxy_ax)
+    fraction_ax.spines["top"].set_visible(False)
+    proxy_ax.set_xticks(x)
+    proxy_ax.set_xticklabels(summary["stage"].str.replace("_", "-"))
+    proxy_ax.set_ylabel("Candidate-center count")
+    fraction_ax.set_ylabel("Image area fraction")
+    proxy_ax.set_title("Stage-wise contrast in cotton visibility")
+    proxy_ax.grid(axis="y", alpha=0.16, linewidth=0.6)
+    proxy_ax.legend(
+        [proxy_bars, fraction_bars],
+        ["Mean proxy count", "Mean white-region fraction"],
+        frameon=False,
+        loc="upper left",
+    )
     fig.tight_layout()
     fig.savefig(out_dir / "fig_quantitative_panel.png", bbox_inches="tight")
     plt.close(fig)

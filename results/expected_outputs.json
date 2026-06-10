@@ -52,5 +52,12 @@
       "white_fraction": 0.0198
     }
   },
-  "interpretation": "The checked-in result tables support the qualitative stage trend and the newly checked-in files provide SLURM/rank-0 run provenance. They do not exactly reproduce the draft paper Table II values or provide a parsed 4/8/16/32 normalized scaling table."
+  "interpretation": "The checked-in result tables support the qualitative stage trend and the newly checked-in files provide SLURM/rank-0 run provenance. They do not exactly reproduce the draft paper Table II values or provide a parsed 4/8/16/32 normalized scaling table.",
+  "colab_gpu_provenance": {
+    "notebook": "notebooks/TACC_SC26.ipynb",
+    "accelerator": "GPU",
+    "machine_shape": "hm",
+    "gpu_type": "H100",
+    "boundary": "Colab/Jupyter H100 proxy evidence; not a parsed 4/8/16/32 multi-GPU scaling table."
+  }
 }

@@ -5,7 +5,7 @@ workflow used when direct Stampede3 access was unavailable.
 
 Verified notebook evidence:
 
-- notebook metadata records a Colab GPU session;
+- notebook metadata records a Colab GPU session with `accelerator: GPU`, `machine_shape: hm`, and `gpuType: H100`;
 - the notebook writes `LLM_colab_paper_fixed.py`;
 - the generated script logs `rank=0`, `world_size=1`, and `local_rank=0`;
 - the generated script selects CUDA when available and records the CUDA device
