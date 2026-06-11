@@ -27,8 +27,7 @@ SC26 rebuttal.
 
 ## Important Boundary
 
-The notebook and checked-in logs support an H100 Colab proxy path and a
-single-rank Slurm provenance path. They do not contain a parsed 4/8/16/32
+The notebook records an H100 validation/proxy path for the visual-language stage, and the checked-in Slurm files record the submitted rank-level provenance path. They do not contain a parsed 4/8/16/32
 multi-GPU scaling table. In rebuttal language, describe this as local/proxy GPU
 execution evidence, not as verified multi-GPU Stampede3 scaling evidence unless
 the missing scaling logs are added.

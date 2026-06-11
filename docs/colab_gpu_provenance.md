@@ -1,7 +1,7 @@
 # Colab GPU Provenance Notes
 
-The attached `notebooks/TACC_SC26.ipynb` includes a Colab GPU fallback/proxy
-workflow used when direct Stampede3 access was unavailable.
+The attached `notebooks/TACC_SC26.ipynb` includes a Colab H100 validation/proxy
+workflow used to validate the visual-language stage.
 
 Verified notebook evidence:
 

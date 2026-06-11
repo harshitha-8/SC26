@@ -37,7 +37,7 @@ For figure regeneration from already available image folders, a CPU workstation
 is sufficient. Qwen2.5-VL inference cells in the notebook require a GPU for
 practical execution. The paper describes Stampede3 as a SLURM-managed
 distributed GPU environment. The checked-in notebook also documents a Colab GPU
-fallback/proxy workflow used when direct Stampede3 access was unavailable. Exact
+validation/proxy workflow used to validate the visual-language stage. Exact
 Stampede3 hardware specifications are not available in this artifact.
 
 The checked-in SLURM job provenance used one node, one task, four CPUs per task,

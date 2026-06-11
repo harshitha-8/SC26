@@ -16,7 +16,7 @@ reproducibility.
 - [x] Validation script: `scripts/validate_results.py`.
 - [x] GitHub Actions workflow for table validation.
 - [x] Traceability matrix: `docs/traceability.md`.
-- [x] Colab GPU fallback/proxy workflow in `notebooks/TACC_SC26.ipynb`.
+- [x] Colab H100 validation/proxy workflow in `notebooks/TACC_SC26.ipynb`.
 - [x] Submitted SLURM script: `slurm/submission.slurm`.
 - [x] SLURM job logs: `logs/slurm_3007292.log` and `logs/slurm_3007292.err`.
 - [x] Rank-0 inference log: `logs/inference_rank0.log`.

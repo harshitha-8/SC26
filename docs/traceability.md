@@ -27,8 +27,7 @@ requiring additional provenance or not exactly reproduced.
 
 ## Colab GPU Provenance
 
-The checked-in notebook contains Colab GPU fallback/proxy workflows used when
-direct Stampede3 access was unavailable. In particular, it writes and runs
+The checked-in notebook contains Colab H100 validation/proxy workflows used as complementary evidence for the visual-language stage. In particular, it writes and runs
 `LLM_colab_paper_fixed.py`, logs a single-rank GPU execution
 (`rank=0`, `world_size=1`, `local_rank=0`), records the selected CUDA device,
 and writes latency-oriented outputs such as `paper_results.json`,

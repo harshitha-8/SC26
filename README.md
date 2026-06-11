@@ -60,8 +60,8 @@ The checked-in result files support the following reproducible claims:
 
 The repository is also explicit about provenance. The checked-in CSVs correspond
 to the current notebook/Drive output set, while the paper draft reports a
-smaller 80/80 Table II summary. The notebook includes Colab GPU fallback/proxy
-workflows used when direct Stampede3 access was unavailable, including
+smaller 80/80 Table II summary. The notebook includes Colab H100 validation/proxy
+workflows used to validate the visual-language stage, including
 Qwen2.5-VL inference, latency measurement, and publication-output generation.
 Exact Table III verification should be tied to the parsed Colab or Stampede3
 scaling output used for the final paper table. See
